@@ -1,0 +1,75 @@
+<div class="dialog-content">
+  <div class="card shadow">
+    <div class="card-header text-white d-flex justify-content-between align-items-center" style="background-color: #0056b3;">
+      <h4 class="mb-0">{{data?.course ? 'Edit' : 'Add'}} Course</h4>
+      <button type="button" class="btn-close btn-close-white" aria-label="Close" mat-dialog-close></button>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="courseForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="mb-3">
+          <label for="course_name" class="form-label">Course Name <span class="text-danger">*</span></label>
+          <input type="text" id="course_name" class="form-control" formControlName="course_name" 
+            [ngClass]="{'is-invalid': courseForm.get('course_name')?.invalid && courseForm.get('course_name')?.touched}">
+          <div class="invalid-feedback" *ngIf="courseForm.get('course_name')?.errors?.['required']">
+            Course name is required.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="course_category" class="form-label">Category <span class="text-danger">*</span></label>
+          <input type="text" id="course_category" class="form-control" formControlName="course_category"
+            [ngClass]="{'is-invalid': courseForm.get('course_category')?.invalid && courseForm.get('course_category')?.touched}">
+          <div class="invalid-feedback" *ngIf="courseForm.get('course_category')?.errors?.['required']">
+            Category is required.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="course_duration" class="form-label">Duration <span class="text-danger">*</span></label>
+          <input type="text" id="course_duration" class="form-control" formControlName="course_duration"
+            [ngClass]="{'is-invalid': courseForm.get('course_duration')?.invalid && courseForm.get('course_duration')?.touched}">
+          <div class="invalid-feedback" *ngIf="courseForm.get('course_duration')?.errors?.['required']">
+            Duration is required.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="course_content" class="form-label">Course Content <span class="text-danger">*</span></label>
+          <textarea id="course_content" class="form-control" formControlName="course_content" rows="3"
+            [ngClass]="{'is-invalid': courseForm.get('course_content')?.invalid && courseForm.get('course_content')?.touched}"></textarea>
+          <div class="invalid-feedback" *ngIf="courseForm.get('course_content')?.errors?.['required']">
+            Course content is required.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="course_shedule" class="form-label">Schedule <span class="text-danger">*</span></label>
+          <input type="text" id="course_shedule" class="form-control" formControlName="course_shedule"
+            [ngClass]="{'is-invalid': courseForm.get('course_shedule')?.invalid && courseForm.get('course_shedule')?.touched}">
+          <div class="invalid-feedback" *ngIf="courseForm.get('course_shedule')?.errors?.['required']">
+            Schedule is required.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="course_fee" class="form-label">Course Fee <span class="text-danger">*</span></label>
+          <input type="text" id="course_fee" class="form-control" formControlName="course_fee"
+            [ngClass]="{'is-invalid': courseForm.get('course_fee')?.invalid && courseForm.get('course_fee')?.touched}">
+          <div class="invalid-feedback" *ngIf="courseForm.get('course_fee')?.errors?.['required']">
+            Course fee is required.
+          </div>
+        </div>
+
+        <div class="d-flex gap-2 justify-content-end mt-4">
+          <button type="submit" class="btn text-white px-4" style="background-color: #0056b3;" [disabled]="courseForm.invalid">
+            <i class="bi" [ngClass]="data?.course ? 'bi-save' : 'bi-plus-circle'"></i>
+            {{data?.course ? 'Update' : 'Add'}} Course
+          </button>
+          <button type="button" class="btn px-4" style="background-color: #ff9800; color: #fff;" (click)="onReset()">
+            <i class="bi bi-x-circle"></i> Reset
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

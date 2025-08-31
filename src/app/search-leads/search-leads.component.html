@@ -1,0 +1,91 @@
+<div class="card p-4 shadow">
+    <h2 class="text-xl font-bold mb-4">🔍 Enquiry Search</h2>
+
+    <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="row g-3">
+        <div class="col-md-4">
+            <label class="form-label">From Date</label>
+            <input type="date" formControlName="from_date" class="form-control" />
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">To Date</label>
+            <input type="date" formControlName="to_date" class="form-control" />
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">Status</label>
+            <select class="form-select" formControlName="status">
+                <option value="">-- Select Status --</option>
+                <option value="New">New</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Joined">Joined</option>
+                <option value="Not Interested">Not Interested</option>
+            </select>
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">Source</label>
+            <select class="form-select" formControlName="source">
+                <option value="">-- Select Source --</option>
+                <option value="Facebook">Direct Call</option>
+                <option value="Instagram">Walkin</option>
+                <option value="Google">Referral</option>
+                <option value="Referral">Referral</option>
+            </select>
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">Mobile</label>
+            <input type="text" formControlName="mobile" class="form-control" />
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">Course</label>
+            <select class="form-select" formControlName="course">
+                <option value="">-- Select Course --</option>
+                <option *ngFor="let course of courseList" [value]="course.id">{{ course.name }}</option>
+            </select>
+        </div>
+
+        <div class="col-12 d-flex gap-2">
+            <button type="submit" class="btn btn-primary">🔍 Search</button>
+            <button type="button" (click)="onReset()" class="btn btn-secondary">🔄 Reset</button>
+        </div>
+    </form>
+
+    <div *ngIf="loading" class="mt-4 text-blue-500">Loading...</div>
+
+    <div *ngIf="leads.length > 0" class="mt-6">
+        <h3 class="text-lg font-semibold mb-2">Search Results ({{ leads.length }})</h3>
+        <!-- <table class="table-auto w-full border text-sm">
+            <thead>
+                <tr>
+                    <th class="border px-2 py-1">Name</th>
+                    <th class="border px-2 py-1">Mobile</th>
+                    <th class="border px-2 py-1">Status</th>
+                    <th class="border px-2 py-1">Course</th>
+                    <th class="border px-2 py-1">Branch</th>
+                    <th class="border px-2 py-1">Assigned To</th>
+                    <th class="border px-2 py-1">Enquired Date</th>
+                    <th class="border px-2 py-1">Next Follow-up</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let enq of leads">
+                    <td class="border px-2 py-1">{{ enq.enq_name }}</td>
+                    <td class="border px-2 py-1">{{ enq.enq_phone1 }}</td>
+                    <td class="border px-2 py-1">{{ enq.enq_status }}</td>
+                    <td class="border px-2 py-1">{{ enq.course_name }}</td>
+                    <td class="border px-2 py-1">{{ enq.branch_name }}</td>
+                    <td class="border px-2 py-1">{{ enq.user_name}}</td>
+                    <td class="border px-2 py-1">{{ enq.enq_date }}</td>
+                    <td class="border px-2 py-1">{{ enq.enq_next_flw_dt}}</td>
+
+                </tr>
+            </tbody>
+        </table> -->
+        <ag-grid-angular style="width: 100%; height: 500px;" class="ag-theme-alpine" [rowData]="leads"
+            [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" [pagination]="true" [paginationPageSize]="20">
+        </ag-grid-angular>
+    </div>
+</div>

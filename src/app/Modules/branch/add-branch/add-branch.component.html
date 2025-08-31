@@ -1,0 +1,60 @@
+<div class="dialog-content" style="width: 800px;">
+  <div class="card shadow">
+    <div class="card-header text-white d-flex justify-content-between align-items-center" style="background-color: #0056b3;">
+      <h4 class="mb-0">{{data?.branch ? 'Edit' : 'Add'}} Branch</h4>
+      <button type="button" class="btn-close btn-close-white" aria-label="Close" mat-dialog-close></button>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="branchForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="mb-3">
+          <label for="branch_name" class="form-label">Branch Name <span class="text-danger">*</span></label>
+          <input type="text" id="branch_name" class="form-control" formControlName="branch_name" 
+            [ngClass]="{'is-invalid': branchForm.get('branch_name')?.invalid && branchForm.get('branch_name')?.touched}">
+          <div class="invalid-feedback" *ngIf="branchForm.get('branch_name')?.errors?.['required']">
+            Branch name is required.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="branch_address" class="form-label">Branch Address <span class="text-danger">*</span></label>
+          <input type="text" id="branch_address" class="form-control" formControlName="branch_address" 
+            [ngClass]="{'is-invalid': branchForm.get('branch_address')?.invalid && branchForm.get('branch_address')?.touched}">
+          <div class="invalid-feedback" *ngIf="branchForm.get('branch_address')?.errors?.['required']">
+            Branch address is required.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="branch_phone1" class="form-label">Branch Phone 1 <span class="text-danger">*</span></label>
+          <input type="text" id="branch_phone1" class="form-control" formControlName="branch_phone1" maxlength="10" 
+            [ngClass]="{'is-invalid': branchForm.get('branch_phone1')?.invalid && branchForm.get('branch_phone1')?.touched}">
+          <div class="invalid-feedback" *ngIf="branchForm.get('branch_phone1')?.errors?.['required']">
+            Phone number is required.
+          </div>
+          <div class="invalid-feedback" *ngIf="branchForm.get('branch_phone1')?.errors?.['pattern']">
+            Enter a valid 10-digit phone number.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="branch_phone2" class="form-label">Branch Phone 2</label>
+          <input type="text" id="branch_phone2" class="form-control" formControlName="branch_phone2" maxlength="10" 
+            [ngClass]="{'is-invalid': branchForm.get('branch_phone2')?.invalid && branchForm.get('branch_phone2')?.touched}">
+          <div class="invalid-feedback" *ngIf="branchForm.get('branch_phone2')?.errors?.['pattern']">
+            Enter a valid 10-digit phone number.
+          </div>
+        </div>
+
+        <div class="d-flex gap-2 justify-content-end mt-4">
+          <button type="submit" class="btn text-white px-4" style="background-color: #0056b3;" [disabled]="branchForm.invalid">
+            <i class="bi" [ngClass]="data?.branch ? 'bi-save' : 'bi-plus-circle'"></i>
+            {{data?.branch ? 'Update' : 'Add'}} Branch
+          </button>
+          <button type="button" class="btn px-4" style="background-color: #ff9800; color: #fff;" (click)="onReset()">
+            <i class="bi bi-x-circle"></i> Reset
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

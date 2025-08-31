@@ -1,0 +1,14 @@
+[
+    {
+        "courseID": 1,
+        "courseName":"Primavera Training"
+    },
+    {
+        "courseID": 2,
+        "courseName":"Angular Training"
+    },
+    {
+        "courseID": 3,
+        "courseName":"Full Stack Training"
+    }
+]

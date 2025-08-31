@@ -1,0 +1,63 @@
+<h1>Add New Batch</h1>
+<div class="header-separator"></div>
+<form>
+    <div class="form-group row">
+        <div class="col-sm-4 row">
+            <label class="control-label col-sm-3" for="btchNm">Batch Name:<span class="reqspan">*</span></label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="btchNm" placeholder="Enter Batch Name">
+            </div>
+        </div>
+        <div class="col-sm-4 row">
+            <label class="control-label col-sm-3" for="branch">Branch:<span class="reqspan">*</span></label>
+            <div class="col-sm-8">
+                <select name="branch" id="branch" class="form-select">
+                    <option *ngFor="let t of branchList" [value]="t.branchID">{{t.branchName}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-4 row">
+            <label class="control-label col-sm-4" for="branch">Training Mode:<span class="reqspan">*</span></label>
+            <div class="col-sm-8">
+                <select name="mode" id="mode" class="form-select">
+                    <option *ngFor="let t of trainingMode" [value]="t.modeID">{{t.trainingMode}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row mt-3">
+        <div class="col-sm-4 row">
+            <label class="control-label col-sm-3" for="course">Course:<span class="reqspan">*</span></label>
+            <div class="col-sm-8">
+                <select name="trainer" id="course" class="form-select">
+                    <option *ngFor="let t of courseList" [value]="t.course">{{t.courseName}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-4 row">
+            <label class="control-label col-sm-3" for="trainer">Trainer:<span class="reqspan">*</span></label>
+            <div class="col-sm-8">
+                <select name="trainer" id="trainer" class="form-select">
+                    <option *ngFor="let t of trainerList" [value]="t.trainerID">{{t.trainerName}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row mt-3">
+        <div class="col-sm-4 row">
+            <label class="control-label col-sm-3" for="startDate">Start Date:<span class="reqspan">*</span></label>
+            <div class="col-sm-8">
+                <input type="date" class="form-control" id="startDate">
+            </div>
+        </div>
+        <div class="col-sm-4 row">
+            <label class="control-label col-sm-3" for="endDate">End Date:<span class="reqspan">*</span></label>
+            <div class="col-sm-8">
+                <input type="date" class="form-control" id="endDate">
+            </div>
+        </div>
+    </div>
+    <div class="form-group mt-4">
+        <button type="button" class="btn btn-primary">Add Batch</button>
+    </div>
+</form>

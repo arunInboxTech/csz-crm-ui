@@ -1,0 +1,14 @@
+[
+    {
+        "modeID": 1,
+        "trainingMode":"Classroom"
+    },
+    {
+        "modeID": 2,
+        "trainingMode":"Online"
+    },
+    {
+        "modeID": 3,
+        "trainingMode":"Hybrid"
+    }
+]

@@ -1,0 +1,75 @@
+<div class="dialog-content">
+  <div class="card shadow">
+    <div class="card-header text-white d-flex justify-content-between align-items-center" style="background-color: #0056b3;">
+      <h4 class="mb-0">{{data?.trainer ? 'Edit' : 'Add'}} Trainer</h4>
+      <button type="button" class="btn-close btn-close-white" aria-label="Close" mat-dialog-close></button>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="trainerForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="mb-3">
+          <label for="trainer_name" class="form-label">Name <span class="text-danger">*</span></label>
+          <input type="text" id="trainer_name" class="form-control" formControlName="trainer_name" 
+            [ngClass]="{'is-invalid': trainerForm.get('trainer_name')?.invalid && trainerForm.get('trainer_name')?.touched}">
+          <div class="invalid-feedback" *ngIf="trainerForm.get('trainer_name')?.errors?.['required']">
+            Name is required.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="trainer_phone" class="form-label">Phone <span class="text-danger">*</span></label>
+          <input type="text" id="trainer_phone" class="form-control" formControlName="trainer_phone" maxlength="10"
+            [ngClass]="{'is-invalid': trainerForm.get('trainer_phone')?.invalid && trainerForm.get('trainer_phone')?.touched}">
+          <div class="invalid-feedback" *ngIf="trainerForm.get('trainer_phone')?.errors?.['required']">
+            Phone number is required.
+          </div>
+          <div class="invalid-feedback" *ngIf="trainerForm.get('trainer_phone')?.errors?.['pattern']">
+            Enter a valid 10-digit phone number.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="trainer_email" class="form-label">Email <span class="text-danger">*</span></label>
+          <input type="email" id="trainer_email" class="form-control" formControlName="trainer_email"
+            [ngClass]="{'is-invalid': trainerForm.get('trainer_email')?.invalid && trainerForm.get('trainer_email')?.touched}">
+          <div class="invalid-feedback" *ngIf="trainerForm.get('trainer_email')?.errors?.['required']">
+            Email is required.
+          </div>
+          <div class="invalid-feedback" *ngIf="trainerForm.get('trainer_email')?.errors?.['email']">
+            Enter a valid email address.
+          </div>
+        </div>      
+
+        <div class="mb-3">
+          <label for="trainer_address" class="form-label">Address <span class="text-danger">*</span></label>
+          <textarea id="trainer_address" class="form-control" formControlName="trainer_address" rows="2"
+            [ngClass]="{'is-invalid': trainerForm.get('trainer_address')?.invalid && trainerForm.get('trainer_address')?.touched}"></textarea>
+          <div class="invalid-feedback" *ngIf="trainerForm.get('trainer_address')?.errors?.['required']">
+            Address is required.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="trainer_status" class="form-label">Status <span class="text-danger">*</span></label>
+          <select class="form-select" id="trainer_status" formControlName="trainer_status"
+            [ngClass]="{'is-invalid': trainerForm.get('trainer_status')?.invalid && trainerForm.get('trainer_status')?.touched}">
+            <option value="1">Active</option>
+            <option value="0">Inactive</option>
+          </select>
+          <div class="invalid-feedback" *ngIf="trainerForm.get('trainer_status')?.errors?.['required']">
+            Status is required.
+          </div>
+        </div>
+
+        <div class="d-flex gap-2 justify-content-end mt-4">
+          <button type="submit" class="btn text-white px-4" style="background-color: #0056b3;" [disabled]="trainerForm.invalid">
+            <i class="bi" [ngClass]="data?.trainer ? 'bi-save' : 'bi-plus-circle'"></i>
+            {{data?.trainer ? 'Update' : 'Add'}} Trainer
+          </button>
+          <button type="button" class="btn px-4" style="background-color: #ff9800; color: #fff;" (click)="onReset()">
+            <i class="bi bi-x-circle"></i> Reset
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

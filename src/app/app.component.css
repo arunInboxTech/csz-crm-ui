@@ -1,0 +1,81 @@
+.toolbar-container {
+  background-color: white;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 0 16px;
+  height: auto;
+  min-height: 64px;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mat-button {
+  height: 64px;
+  border-radius: 0;
+  padding: 0 16px;
+  font-weight: 500;
+}
+
+.mat-button:hover {
+  background-color: #f5f5f5;
+}
+
+.mat-button .mat-icon {
+  margin-left: 4px;
+  font-size: 20px;
+  height: 20px;
+  width: 20px;
+}
+
+::ng-deep .mat-menu-panel {
+  min-width: 200px !important;
+}
+
+::ng-deep .mat-menu-item {
+  font-size: 14px;
+}
+
+::ng-deep .mat-menu-item .mat-icon {
+  margin-right: 8px;
+}
+
+.nav-button {
+  height: 64px;
+  border-radius: 0;
+  padding: 0 16px;
+  font-weight: 500;
+}
+
+.button-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-width: 80px;
+}
+
+.button-content .mat-icon {
+  margin-left: 4px;
+  font-size: 20px;
+  height: 20px;
+  width: 20px;
+}
+
+.footer {
+  background-color: #f8f9fa;
+  border-top: 1px solid #e0e0e0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 10px 0;
+}
+
+/* Add this new class to create space for the footer */
+.main-content {
+  padding-bottom: 80px; /* Adjust this value based on your footer height */
+  min-height: calc(100vh - 64px); /* Subtract toolbar height */
+}

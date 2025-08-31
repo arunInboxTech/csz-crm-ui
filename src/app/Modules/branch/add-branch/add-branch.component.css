@@ -1,0 +1,38 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.dialog-content {
+  padding: 0;
+}
+
+.card {
+  margin: 0;
+  box-shadow: none !important;
+}
+
+.card-header {
+  border-radius: 0;
+}
+
+.form-control:focus {
+  border-color: #0056b3;
+  box-shadow: 0 0 0 0.2rem rgba(0, 86, 179, 0.25);
+}
+
+/* Make inputs take full width of their containers */
+.form-control {
+  width: 100%;
+}
+
+/* Responsive padding adjustments */
+.card-body {
+  padding: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .card-body {
+    padding: 1rem;
+  }
+}

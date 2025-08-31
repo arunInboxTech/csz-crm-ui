@@ -1,0 +1,117 @@
+<div class="dialog-content">
+  <div class="card shadow mb-4">
+    <div class="card-header text-white d-flex justify-content-between align-items-center"
+      style="background-color: #0056b3;">
+      <h4 class="mb-0">{{data?.batch ? 'Edit' : 'Add'}} Batch</h4>
+      <button type="button" class="btn-close btn-close-white" aria-label="Close" mat-dialog-close></button>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="batchForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="mb-3">
+          <label for="batch_name" class="form-label">Batch Name <span class="text-danger">*</span></label>
+          <input type="text" id="batch_name" class="form-control" formControlName="batch_name"
+            [ngClass]="{'is-invalid': batchForm.get('batch_name')?.invalid && batchForm.get('batch_name')?.touched}">
+          <div class="invalid-feedback" *ngIf="batchForm.get('batch_name')?.errors?.['required']">
+            Batch name is required.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="batch_course_id" class="form-label">Course <span class="text-danger">*</span></label>
+          <select class="form-select" id="batch_course_id" formControlName="batch_course_id"
+            [ngClass]="{'is-invalid': batchForm.get('batch_course_id')?.invalid && batchForm.get('batch_course_id')?.touched}">
+            <option value="">Select Course</option>
+            <option [value]="course.id_course" *ngFor="let course of courses">{{course.course_name}}</option>
+          </select>
+          <div class="invalid-feedback" *ngIf="batchForm.get('batch_course_id')?.errors?.['required']">
+            Course is required.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="trainer_id" class="form-label">Trainer <span class="text-danger">*</span></label>
+          <select class="form-select" id="trainer_id" formControlName="trainer_id"
+            [ngClass]="{'is-invalid': batchForm.get('trainer_id')?.invalid && batchForm.get('trainer_id')?.touched}">
+            <option value="">Select Trainer</option>
+            <option [value]="trainer.trainer_id" *ngFor="let trainer of trainers">{{trainer.trainer_name}}</option>
+          </select>
+          <div class="invalid-feedback" *ngIf="batchForm.get('trainer_id')?.errors?.['required']">
+            Trainer is required.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="start_date" class="form-label">Start Date <span class="text-danger">*</span></label>
+          <input type="date" id="start_date" class="form-control" formControlName="start_date"
+            [ngClass]="{'is-invalid': batchForm.get('start_date')?.invalid && batchForm.get('start_date')?.touched}">
+          <div class="invalid-feedback" *ngIf="batchForm.get('start_date')?.errors?.['required']">
+            Start date is required.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="exp_end_date" class="form-label">Expected End Date <span class="text-danger">*</span></label>
+          <input type="date" id="exp_end_date" class="form-control" formControlName="exp_end_date"
+            [min]="batchForm.get('start_date')?.value" 
+            [ngClass]="{'is-invalid': (batchForm.get('exp_end_date')?.invalid && batchForm.get('exp_end_date')?.touched) || batchForm.errors?.['endDateInvalid']}">
+          <div class="invalid-feedback">
+            <span *ngIf="batchForm.get('exp_end_date')?.errors?.['required']">Expected End Date is required.</span>
+            <span *ngIf="batchForm.errors?.['endDateInvalid']">Expected End Date must be after Start Date.</span>
+          </div>
+        </div>
+
+        <!-- Completion Date field - only visible in edit mode -->
+        <div class="mb-3" *ngIf="data?.batch">
+          <label for="completion_date" class="form-label">Completion Date</label>
+          <input type="date" id="completion_date" class="form-control" formControlName="completion_date"
+            [min]="batchForm.get('start_date')?.value"
+            [ngClass]="{'is-invalid': batchForm.get('completion_date')?.invalid && batchForm.get('completion_date')?.touched}">
+          <div class="invalid-feedback" *ngIf="batchForm.get('completion_date')?.errors?.['dateInvalid']">
+            Completion date must be after Start Date.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="batch_status" class="form-label">Status <span class="text-danger">*</span></label>
+          <select class="form-select" id="batch_status" formControlName="batch_status"
+            [ngClass]="{'is-invalid': batchForm.get('batch_status')?.invalid && batchForm.get('batch_status')?.touched}">
+            <option value="" disabled>Select Status</option> <!-- Default placeholder -->
+            <option *ngFor="let status of batchStatusSorted" [value]="status.key">
+              {{ status.value }}
+            </option>
+          </select>
+          <div class="invalid-feedback" *ngIf="batchForm.get('batch_status')?.errors?.['required']">
+            Status is required.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="exp_joiner" class="form-label">Expected Joiners <span class="text-danger">*</span></label>
+          <input type="number" id="exp_joiner" class="form-control" formControlName="exp_joiner"
+            [ngClass]="{'is-invalid': batchForm.get('exp_joiner')?.invalid && batchForm.get('exp_joiner')?.touched}">
+          <div class="invalid-feedback" *ngIf="batchForm.get('exp_joiner')?.errors?.['required']">
+            Expected Joiners is required.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <div class="form-check">
+            <input type="checkbox" id="is_batch_completed" class="form-check-input"
+              formControlName="is_batch_completed">
+            <label class="form-check-label" for="is_batch_completed">Is Batch Completed?</label>
+          </div>
+        </div>
+
+        <div class="d-flex gap-2 justify-content-end mt-4">
+          <button type="submit" class="btn text-white px-4" style="background-color: #0056b3;"
+            [disabled]="batchForm.invalid">
+            <i class="bi" [ngClass]="data?.batch ? 'bi-save' : 'bi-plus-circle'"></i>
+            {{data?.batch ? 'Update' : 'Add'}} Batch
+          </button>
+          <button type="button" class="btn px-4" style="background-color: #ff9800; color: #fff;" (click)="onReset()">
+            <i class="bi bi-x-circle"></i> Reset
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

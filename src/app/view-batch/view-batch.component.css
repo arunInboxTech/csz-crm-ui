@@ -1,0 +1,20 @@
+.accordion-panel-hdg {
+    padding: 5px 20px;
+}
+
+.accordion-header{
+    margin-bottom: 5px;
+    
+}
+
+.accordion-button{
+    font-weight: 500;
+}
+
+/* .accordion-button:not(.collapsed){
+    background-color: #e7e6e6;  
+} */
+
+.accordion-button:focus{
+    box-shadow: none;
+}

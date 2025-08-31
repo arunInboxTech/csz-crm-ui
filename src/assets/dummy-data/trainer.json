@@ -1,0 +1,14 @@
+[
+    {
+        "trainerID": 1,
+        "trainerName":"Karthik"
+    },
+    {
+        "trainerID": 2,
+        "trainerName":"Arun"
+    },
+    {
+        "trainerID": 3,
+        "trainerName":"Gopi"
+    }
+]
